@@ -1,4 +1,4 @@
--- QUERY 1: Number of lessons per month during a specified time, ordered in descending order
+-- QUERY 1: Number of lessons per month during a specified time, ordered in ascending order
 CREATE VIEW lessons_per_month AS
 SELECT
     TO_CHAR(ls.start_time, 'Mon') AS Month,
