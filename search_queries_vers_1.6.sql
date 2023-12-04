@@ -1,5 +1,5 @@
--- Number of lessons per month during a specified time, ordered in descending order
-CREATE VIEW lesson_per_month AS
+-- QUERY 1: Number of lessons per month during a specified time, ordered in descending order
+CREATE VIEW lessons_per_month AS
 SELECT
     TO_CHAR(ls.start_time, 'Mon') AS Month,
     COUNT(*) AS Total,
@@ -19,8 +19,8 @@ ORDER BY
     EXTRACT(MONTH FROM ls.start_time) ASC;
 
 
--- Number of students with no sibling, one sibling, and with two siblings, etc.
-CREATE VIEW number_of_sibling AS
+-- QUERY 2: Number of students with no sibling, one sibling, and with two siblings, etc.
+CREATE VIEW number_of_siblings AS
 SELECT
   CASE WHEN sibling_count IS NULL THEN 0 ELSE sibling_count END AS "No of Siblings",
   COUNT(*) AS "No of Students"
@@ -42,7 +42,7 @@ ORDER BY
   "No of Siblings";
 
 
--- Ids and names of all instructors who has given more than a specific number (0) of lessons during the current month
+-- QUERY 3: Ids and names of all instructors who has given more than a specific number (0) of lessons during the current month
 CREATE VIEW instructor_monthly_lesson AS
  SELECT
   ins.id AS "Instructor Id",
@@ -65,7 +65,7 @@ ORDER BY
   COUNT(*) DESC;
 
 
- -- QUERY 4 version 2
+ -- QUERY 4: All ensembles held during a specific week
 CREATE VIEW ENSEMBLES_NEXT_WEEK AS
 
 SELECT 
