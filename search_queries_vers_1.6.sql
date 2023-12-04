@@ -11,7 +11,7 @@ FROM
 JOIN
     lesson_combination AS lc ON ls.lesson_combination_id = lc.id
 WHERE
-    EXTRACT(YEAR FROM ls.start_time) = 2023
+    EXTRACT(YEAR FROM ls.start_time) = 2023 -- Year we are searching
 GROUP BY
     Month,
     EXTRACT(MONTH FROM ls.start_time)
@@ -19,7 +19,7 @@ ORDER BY
     EXTRACT(MONTH FROM ls.start_time) ASC;
 
 
--- QUERY 2: Number of students with no sibling, one sibling, and with two siblings, etc.
+-- QUERY 2: Number of students with no sibling, one sibling, two siblings, etc.
 CREATE VIEW number_of_siblings AS
 SELECT
   CASE WHEN sibling_count IS NULL THEN 0 ELSE sibling_count END AS "No of Siblings",
@@ -34,7 +34,7 @@ FROM (
   GROUP BY
     s.id
   HAVING
-    COUNT(sibling.id) <= 2
+    COUNT(sibling.id) <= 2 -- Does not contain students with more than 2 siblings
 )
 GROUP BY
   sibling_count
@@ -43,7 +43,7 @@ ORDER BY
 
 
 -- QUERY 3: Ids and names of all instructors who has given more than a specific number (0) of lessons during the current month
-CREATE VIEW instructor_monthly_lesson AS
+CREATE VIEW instructor_monthly_lessons AS
  SELECT
   ins.id AS "Instructor Id",
   per.first_name AS "First Name",
@@ -56,7 +56,7 @@ JOIN
 JOIN
   lesson_schedule AS ls ON ins.id = ls.instructor_id
 WHERE
-  EXTRACT(MONTH FROM ls.start_time) = 12
+  EXTRACT(MONTH FROM ls.start_time) = 12 -- Month we are searching
 GROUP BY
   ins.id, per.first_name, per.last_name
 HAVING
@@ -92,6 +92,6 @@ LEFT JOIN
 	booking AS b ON ls.id = b.lesson_schedule_id	
 -- The week we are searching
 WHERE
-    EXTRACT(WEEK FROM start_time) = 49 
+    EXTRACT(WEEK FROM start_time) = 49 -- Week we are searching
 GROUP BY 
 	ls.id, day, "Genre", sc.min_student, sc.max_student;
