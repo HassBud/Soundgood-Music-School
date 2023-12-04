@@ -16,7 +16,7 @@ GROUP BY
     Month,
     EXTRACT(MONTH FROM ls.start_time)
 ORDER BY
-    EXTRACT(MONTH FROM ls.start_time) ASC;
+    EXTRACT(MONTH FROM ls.start_time);
 
 
 -- QUERY 2: Number of students with no sibling, one sibling, two siblings, etc.
