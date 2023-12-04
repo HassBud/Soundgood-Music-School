@@ -30,7 +30,7 @@ FROM (
     COUNT(sibling.id) AS sibling_count
   FROM
     student AS s
-    LEFT JOIN student AS sibling ON s.sibling_id = sibling.sibling_id AND s.id <> sibling.id
+    LEFT JOIN student AS sibling ON s.sibling_id = sibling.sibling_id AND s.id != sibling.id
   GROUP BY
     s.id
   HAVING
